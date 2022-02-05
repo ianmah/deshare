@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import Navbar from './components/Navbar'
+import Button from './components/Button'
 
 import './App.css'
 
@@ -47,14 +48,16 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <>
       <Navbar/>
+      <div className="App">
         <p>
           {wallet.address}
         </p>
         <h2>your bal: {wallet.balanceInEth} </h2>
-        <button onClick={mintMember}>mint member token</button>
-    </div>
+        <Button onClick={mintMember}>Mint Member</Button>
+      </div>
+    </>
   );
 }
 
