@@ -22,14 +22,14 @@ const main = async () => {
   // ADDRESS TO MINT TO:
   const toAddress = "0x7b41b332ee0fD0CaB0c920B18796DB25193CDD5d"
 
-  console.log("\n\n 🎫 Minting to "+toAddress+"...\n");
+//   console.log("\n\n 🎫 Minting to "+toAddress+"...\n");
 
 //   const { deployer } = await getNamedAccounts();
 //   const yourCollectible = await ethers.getContract("Collectible", deployer);
   
   const DeSharePost = await ethers.getContractFactory("DeSharePost");
   const yourCollectible = await DeSharePost.attach(
-    "0xFca2732652623f082d3F1e615d0b94FA38b1033c" // The deployed contract address
+    "0xCab899ccfc5FDfC080920BE2Fd74AA4bdF35C9AE" // The deployed contract address
   );
 
   const tweet = {
@@ -47,7 +47,8 @@ const main = async () => {
   const metadataURI = metadata.url.replace(/^ipfs:\/\//, "");
 
   console.log("Minting tweet with IPFS URI ("+metadataURI+")")
-  await yourCollectible.mintItem(metadataURI,{gasLimit:10000000})
+  const mintResult = await yourCollectible.mintItem(metadataURI,{gasLimit:10000000})
+  console.log(mintResult)
 
   //await sleep(delayMS)
 
