@@ -1,6 +1,5 @@
-import { useEffect, useState, createRef } from 'react';
-import { Contract, ethers } from 'ethers'
-import { getNetwork } from "@ethersproject/networks";
+import { useEffect, useState } from 'react';
+import { ethers } from 'ethers'
 
 
 import DeSharePost from './artifacts/contracts/DeShare.sol/DeSharePost.json'
@@ -11,10 +10,15 @@ const dspAddress = "0x72611d0fc2062C0115156a2f240eDbDbd9A1F53b"
 // Each is optional, and if you omit it the default
 // API key for that service will be used.
 const provider = new ethers.providers.Web3Provider(window.ethereum)
-const contract = new ethers.Contract(dspAddress, DeSharePost.abi, provider);
 
 function App() {
-  const [bal, setBal] = useState(0)
+  const [wallet, setWallet] = useState({})
+  const [contract, setContract] = useState()
+
+  const mintMember = async () => {
+    const res = await contract.setMemberContract('0xbe806cac1d25803fc97de268341040271cbf622c')
+    console.log(res)
+  }
 
   useEffect(() => {
     async function connectEth() {
@@ -22,11 +26,12 @@ function App() {
       const signer = provider.getSigner()
       const address = await signer.getAddress()
 
+      setContract(new ethers.Contract(dspAddress, DeSharePost.abi, signer))
+
       provider.getBalance(address).then((balance) => {
         // convert a currency unit from wei to ether
         const balanceInEth = ethers.utils.formatEther(balance)
-        console.log(`balance: ${balanceInEth} ETH`)
-        setBal(balanceInEth)
+        setWallet({...wallet, signer, address, balanceInEth})
        })
 
     }
@@ -37,9 +42,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          {wallet.address}
         </p>
-        <h2>your bal: {bal} </h2>
+        <h2>your bal: {wallet.balanceInEth} </h2>
+        <button onClick={mintMember}>mint member token</button>
       </header>
     </div>
   );
