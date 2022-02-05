@@ -1,28 +1,26 @@
-const CONTRACT1 = '0xCab899ccfc5FDfC080920BE2Fd74AA4bdF35C9AE'
-const CONTRACT2 = '0x58Ec1fb58D4C6FdDd390e0c9b939cd44C75b1956'
+const MEMBERCONTRACT = "0xBE806Cac1D25803fc97De268341040271CBf622c";
+const POSTCONTRACT = "0x72611d0fc2062C0115156a2f240eDbDbd9A1F53b";
 
 async function main() {
-    const baseTokenURI = "ipfs://";
-    console.log("Verifying contract:", CONTRACT1);
-    await hre.run("verify:verify", {
-      address: CONTRACT1,
-      constructorArguments: [ baseTokenURI ],
-    });
-    console.log("Contract verified");
-  
-  
-    console.log("Verifying contract:", CONTRACT2);
-    await hre.run("verify:verify", {
-      address: CONTRACT2,
-      constructorArguments: [],
-    });
-    console.log("Contract verified");
+  const baseTokenURI = "ipfs://";
+  console.log("Verifying contract:", POSTCONTRACT);
+  await hre.run("verify:verify", {
+    address: POSTCONTRACT,
+    constructorArguments: [MEMBERCONTRACT, baseTokenURI],
+  });
+  console.log("Contract verified");
 
-  }
-   
-   main()
-     .then(() => process.exit(0))
-     .catch(error => {
-       console.error(error);
-       process.exit(1);
-     });
+  console.log("Verifying contract:", MEMBERCONTRACT);
+  await hre.run("verify:verify", {
+    address: MEMBERCONTRACT,
+    constructorArguments: [],
+  });
+  console.log("Contract verified");
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

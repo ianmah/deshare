@@ -1,17 +1,17 @@
 async function main() {
-  
   const memberContractFactory = await hre.ethers.getContractFactory("DeShareMember");
 
   // Deploy contract with the correct constructor arguments
-  const memberContract = await memberContractFactory.deploy();
+  // const memberContract = await memberContractFactory.deploy();
+  const memberContract = {
+    address: "0xBE806Cac1D25803fc97De268341040271CBf622c",
+  };
 
   // Wait for this transaction to be mined
-  await memberContract.deployed();
+  // await memberContract.deployed();
 
   // Get contract address
-  console.log(`Member contract: https://mumbai.polygonscan.com/token/${memberContract.address}`,);
-
-
+  // console.log(`Member contract: https://mumbai.polygonscan.com/token/${memberContract.address}`);
 
   const baseTokenURI = "ipfs://";
 
@@ -22,14 +22,13 @@ async function main() {
   const contractFactory = await hre.ethers.getContractFactory("DeSharePost");
 
   // Deploy contract with the correct constructor arguments
-  const contract = await contractFactory.deploy(baseTokenURI);
+  const contract = await contractFactory.deploy(memberContract.address, baseTokenURI);
 
   // Wait for this transaction to be mined
   await contract.deployed();
 
   // Get contract address
-  console.log(`Post contract: https://mumbai.polygonscan.com/token/${contract.address}`,);
-
+  console.log(`Post contract: https://mumbai.polygonscan.com/token/${contract.address}`);
 
   // console.log("Verifying contract:", contract.address);
   // await hre.run("verify:verify", {
@@ -38,14 +37,12 @@ async function main() {
   // });
   // console.log("Contract verified");
 
-
   // console.log("Verifying contract:", memberContract.address);
   // await hre.run("verify:verify", {
   //   address: memberContract.address,
   //   constructorArguments: [],
   // });
   // console.log("Contract verified");
-
 
   // Reserve NFTs
   // let txn = await contract.reserveNFTs();
@@ -59,12 +56,11 @@ async function main() {
   // // Get all token IDs of the owner
   // let tokens = await contract.tokensOfOwner(owner.address)
   // console.log("Owner has tokens: ", tokens);
-
 }
- 
- main()
-   .then(() => process.exit(0))
-   .catch(error => {
-     console.error(error);
-     process.exit(1);
-   });
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
