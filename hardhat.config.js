@@ -4,11 +4,20 @@
 
 require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-etherscan");
 
-const { API_URL, PRIVATE_KEY } = process.env;
+const { API_URL, PRIVATE_KEY, POLYGONSCAN_API } = process.env;
 
 module.exports = {
-   solidity: "0.8.9",
+   solidity: {
+     version: "0.8.9",
+     settings: {
+       optimizer: {
+         enabled: true,
+         runs: 200
+       }
+     }
+   },
    defaultNetwork: "polygon_mumbai",
    networks: {
       hardhat: {},
@@ -17,4 +26,9 @@ module.exports = {
          accounts: [`0x${PRIVATE_KEY}`]
       }
    },
+   etherscan: {
+     apiKey: {
+       polygonMumbai: POLYGONSCAN_API
+     }
+   }
 }
