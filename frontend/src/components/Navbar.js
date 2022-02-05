@@ -17,11 +17,22 @@ const Title = styled.h1`
     padding-left: 8px;
 `
 
-export default () => {
+const AddressContainer = styled.p`
+    background: #e4baff;
+    border-radius: 15px;
+    padding: 0.5em;
+    color: #672491;
+    margin-left: auto;
+`
+
+export default ({ wallet }) => {
     return (
         <Container>
             <StyledImg src="/deshare.png"/>
             <Title>DeShare</Title>
+            <AddressContainer>
+                {wallet.address}
+            </AddressContainer>
         </Container>
     )
 }

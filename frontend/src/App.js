@@ -49,11 +49,8 @@ function App() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar wallet={wallet}/>
       <div className="App">
-        <p>
-          {wallet.address}
-        </p>
         <h2>your bal: {wallet.balanceInEth} </h2>
         <Button onClick={mintMember}>Mint Member</Button>
       </div>
