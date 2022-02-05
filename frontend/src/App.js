@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
+import Navbar from './components/Navbar'
+import Button from './components/Button'
 
+import './App.css'
 
 import DeSharePost from './artifacts/contracts/DeShare.sol/DeSharePost.json'
 import DeShareMember from './artifacts/contracts/DeShare.sol/DeShareMember.json'
@@ -45,15 +48,13 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          {wallet.address}
-        </p>
+    <>
+      <Navbar wallet={wallet}/>
+      <div className="App">
         <h2>your bal: {wallet.balanceInEth} </h2>
-        <button onClick={mintMember}>mint member token</button>
-      </header>
-    </div>
+        <Button onClick={mintMember}>Mint Member</Button>
+      </div>
+    </>
   );
 }
 
