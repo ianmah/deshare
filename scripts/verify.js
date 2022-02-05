@@ -1,5 +1,5 @@
 const MEMBERCONTRACT = "0xBE806Cac1D25803fc97De268341040271CBf622c";
-const POSTCONTRACT = "0x72611d0fc2062C0115156a2f240eDbDbd9A1F53b";
+const POSTCONTRACT = "0x18Ea9baC375BbdB36d2045Fa2ce9762A573a0cD2";
 
 async function main() {
   const baseTokenURI = "ipfs://";

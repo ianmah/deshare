@@ -61,6 +61,8 @@ contract DeSharePost is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     string public baseTokenURI;
 
+    event UpVote(uint256 newVoteCount);
+
     constructor(address _memberContractAddr, string memory baseURI)
         ERC721("DeShare Post", "DSP")
     {
@@ -106,6 +108,7 @@ contract DeSharePost is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         );
         voteMap[postId][membershipId] = true;
         votes[postId].increment();
+        emit UpVote(votes[postId].current());
     }
 
     function getVotes(uint256 postId) public view returns (uint256) {
