@@ -27,8 +27,8 @@ const main = async () => {
 //   const { deployer } = await getNamedAccounts();
 //   const yourCollectible = await ethers.getContract("Collectible", deployer);
   
-  const MyContract = await ethers.getContractFactory("Collectible");
-  const yourCollectible = await MyContract.attach(
+  const DeSharePost = await ethers.getContractFactory("DeSharePost");
+  const yourCollectible = await DeSharePost.attach(
     "0xFca2732652623f082d3F1e615d0b94FA38b1033c" // The deployed contract address
   );
 

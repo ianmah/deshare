@@ -1,16 +1,3 @@
-// async function main() {
-//     // const HelloWorld = await ethers.getContractFactory("HelloWorld");
-//     const DeShareNFT = await ethers.getContractFactory("DeShareNFT");
- 
-//     // Start deployment, returning a promise that resolves to a contract object
-//     const contract = await DeShareNFT.deploy("asd", "0x7b41b332ee0fD0CaB0c920B18796DB25193CDD5d", "0x7b41b332ee0fD0CaB0c920B18796DB25193CDD5d");
-//     // const hello_world = await DeShareNFT.deploy();
-//     // const hello_world = await Address.deploy();
-//     // const hello_world = await ERC721.deploy();
-//     // const hello_world = await ERC721Enumerable.deploy();
-//     console.log("Contract deployed to address:", contract.address);
-//  }
-
 async function main() {
   const baseTokenURI = "ipfs://";
 
@@ -18,7 +5,7 @@ async function main() {
   // const [owner] = await hre.ethers.getSigners();
 
   // Get contract that we want to deploy
-  const contractFactory = await hre.ethers.getContractFactory("Collectible");
+  const contractFactory = await hre.ethers.getContractFactory("DeSharePost");
 
   // Deploy contract with the correct constructor arguments
   const contract = await contractFactory.deploy(baseTokenURI);
@@ -29,6 +16,24 @@ async function main() {
   // Get contract address
   console.log("Contract deployed to:", contract.address);
   console.log(`view contract: https://mumbai.polygonscan.com/token/${contract.address}`,);
+
+
+
+  
+  const memberContractFactory = await hre.ethers.getContractFactory("DeShareMember");
+
+  // Deploy contract with the correct constructor arguments
+  const memberContract = await memberContractFactory.deploy();
+
+  // Wait for this transaction to be mined
+  await memberContract.deployed();
+
+  // Get contract address
+  console.log("Contract deployed to:", memberContract.address);
+  console.log(`view contract: https://mumbai.polygonscan.com/token/${memberContract.address}`,);
+
+
+
 
   // Reserve NFTs
   // let txn = await contract.reserveNFTs();
