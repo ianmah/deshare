@@ -29,7 +29,7 @@ const main = async () => {
   
   const MyContract = await ethers.getContractFactory("Collectible");
   const yourCollectible = await MyContract.attach(
-    "0xA2E7871051cA76529cc6Da0d1e555208dF1E4B6D" // The deployed contract address
+    "0xFca2732652623f082d3F1e615d0b94FA38b1033c" // The deployed contract address
   );
 
   const tweet = {

@@ -28,7 +28,7 @@ async function main() {
 
   // Get contract address
   console.log("Contract deployed to:", contract.address);
-  console.log(`view contract: https://mumbai.polygonscan.com/token/`, contract.address);
+  console.log(`view contract: https://mumbai.polygonscan.com/token/${contract.address}`,);
 
   // Reserve NFTs
   // let txn = await contract.reserveNFTs();
