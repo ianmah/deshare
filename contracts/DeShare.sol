@@ -7,55 +7,96 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract DeShareMember is ERC721, ERC721Enumerable, Ownable {
+contract DeShareMember is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    mapping(address => uint8) private _allowList;
-    uint256 public constant PRICE_PER_TOKEN = 0.001 ether;
+    // mapping(address => uint8) private _allowList;
+    // uint256 public constant PRICE_PER_TOKEN = 0.001 ether;
+
+    string public baseTokenURI;
 
     // TODO: Restrict ability to mint via some kind of allowlist
     // TODO: Define max supply
 
-    constructor() ERC721("DeShare Member", "DSM") {}
+    constructor(string memory baseURI) ERC721("DeShare Member", "DSM") {
+        setBaseURI(baseURI);
+    }
 
-    function mintItem() public returns (uint256) {
+    function _baseURI() internal view virtual override returns (string memory) {
+        return baseTokenURI;
+    }
+
+    function setBaseURI(string memory _baseTokenURI) public onlyOwner {
+        baseTokenURI = _baseTokenURI;
+    }
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
+
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
+        super._burn(tokenId);
+    }
+
+    function mintItem(string memory newTokenURI) public returns (uint256) {
         require(
             balanceOf(msg.sender) < 3,
             "You can only mint three member NFTs"
         );
 
         _tokenIds.increment();
-        _allowList[msg.sender] = 1;
         uint256 id = _tokenIds.current();
         _mint(msg.sender, id);
+        _setTokenURI(id, newTokenURI);
 
         return id;
     }
 
-    function setAllowList(address[] calldata addresses, uint8 numAllowedToMint)
-        external
-        onlyOwner
-    {
-        for (uint256 i = 0; i < addresses.length; i++) {
-            _allowList[addresses[i]] = numAllowedToMint;
-        }
-    }
+    // bafyreie3pxhmo2glhz6knocut227hgyy5o2jumj5uslyle6bwjnc2ujyhi/metadata.json
 
-    function mintAllowList(uint8 numberOfTokens) external payable {
-        require(
-            numberOfTokens <= _allowList[msg.sender],
-            "Exceeded max available to purchase"
-        );
-        require(
-            PRICE_PER_TOKEN * numberOfTokens <= msg.value,
-            "Ether value sent is not correct"
-        );
+    // function mintItemOne() public returns (uint256) {
+    //     require(balanceOf(msg.sender) < 1, "You can only mint one member NFT");
 
-        _allowList[msg.sender] -= numberOfTokens;
-        for (uint256 i = 0; i < numberOfTokens; i++) {
-            mintItem();
-        }
-    }
+    //     _tokenIds.increment();
+
+    //     uint256 id = _tokenIds.current();
+    //     _mint(msg.sender, id);
+
+    //     return id;
+    // }
+
+    // function setAllowList(address[] calldata addresses, uint8 numAllowedToMint)
+    //     external
+    //     onlyOwner
+    // {
+    //     for (uint256 i = 0; i < addresses.length; i++) {
+    //         _allowList[addresses[i]] = numAllowedToMint;
+    //     }
+    // }
+
+    // function mintAllowList(uint8 numberOfTokens) external payable {
+    //     require(
+    //         numberOfTokens <= _allowList[msg.sender],
+    //         "Exceeded max available to purchase"
+    //     );
+    //     require(
+    //         PRICE_PER_TOKEN * numberOfTokens <= msg.value,
+    //         "Ether value sent is not correct"
+    //     );
+
+    //     for (uint256 i = 0; i < numberOfTokens; i++) {
+    //         _allowList[msg.sender] -= 1;
+    //         mintItem();
+    //     }
+    // }
 
     // The following functions are overrides required by Solidity.
 

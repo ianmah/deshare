@@ -1,19 +1,18 @@
-const MEMBERCONTRACT = "0x8C199F1c92c9ecea3FA7c182b5202ba6a5611396";
-const POSTCONTRACT = "0x18Ea9baC375BbdB36d2045Fa2ce9762A573a0cD2";
+const MEMBERCONTRACT = "0x3D41aE3d8dFC326dd77Ee44C249Be7fC068208B3";
+const POSTCONTRACT = "0xA3b36ABBfb2436055E94614B31cdA05336893ec7";
 
 async function main() {
   const baseTokenURI = "ipfs://";
-  console.log("Verifying contract:", POSTCONTRACT);
+  console.log("Verifying post contract:", POSTCONTRACT);
   await hre.run("verify:verify", {
     address: POSTCONTRACT,
     constructorArguments: [MEMBERCONTRACT, baseTokenURI],
   });
   console.log("Contract verified");
-
-  console.log("Verifying contract:", MEMBERCONTRACT);
+  console.log("Verifying member contract:", MEMBERCONTRACT);
   await hre.run("verify:verify", {
     address: MEMBERCONTRACT,
-    constructorArguments: [],
+    constructorArguments: [baseTokenURI],
   });
   console.log("Contract verified");
 }
