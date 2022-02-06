@@ -1,5 +1,7 @@
 # Getting Started
 
+You will need Metamask installed on Google Chrome, connected to Polygon Mumbai network
+
 `npm install` to install all dependencies
 
 `npx hardhat compile` to compile smart contract
@@ -22,4 +24,4 @@ copy the `artifacts/` folder to `frontend/src`
 
 `npm install` install deps
 
-`npm start` run react app
+`npm start` run react app at http://localhost:3000/
