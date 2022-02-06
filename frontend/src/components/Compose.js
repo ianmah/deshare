@@ -25,7 +25,7 @@ const StyledButton = styled(Button)`
     float: right;
 `
 
-const Navbar = ({ contract }) => {
+const Compose = ({ contract }) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
 
@@ -41,6 +41,7 @@ const Navbar = ({ contract }) => {
             image: "ipfs://bafybeianea3jwwkzbjolf2fkb2qk2qfhi3f73yoegqtdnsa55lcdvixezm/post.png"
         }))
 
+        console.log(metadata.path)
         await contract.mintItem(metadata.path)
         setName('')
         setDescription('')
@@ -68,4 +69,4 @@ const Navbar = ({ contract }) => {
     )
 }
 
-export default Navbar
+export default Compose

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import Navbar from './components/Navbar'
 import Compose from './components/Compose'
+import Feed from './components/Feed'
 import Button from './components/Button'
 
 import './App.css'
@@ -53,6 +54,7 @@ function App() {
       <Navbar wallet={wallet} connectWallet={connectWallet} />
       <div className="App">
         <Compose wallet={wallet} contract={contractP} />
+        <Feed/>
         <h2>your bal: {wallet.balanceInEth} </h2>
         <Button onClick={mintMember}>Mint Member</Button>
         {/* <p>{nftMetaData}</p> */}
