@@ -14,6 +14,10 @@
 
 ## Frontend
 
+`npx hardhat compile` to compile smart contracts
+
+copy the `artifacts/` folder to `frontend/src`
+
 `cd frontend`
 
 `npm install` install deps
