@@ -46,6 +46,10 @@ function App() {
     }
     connectEth()
   }, [])
+  
+  const covalentjs = require('covalentjs')
+  const nftMetaData = await covalentjs.classA.getExternalNFTMetadata(
+  80001, 0x18Ea9baC375BbdB36d2045Fa2ce9762A573a0cD2, 1)
 
   return (
     <>
@@ -53,6 +57,7 @@ function App() {
       <div className="App">
         <h2>your bal: {wallet.balanceInEth} </h2>
         <Button onClick={mintMember}>Mint Member</Button>
+        <p>{nftMetaData}</p>
       </div>
     </>
   );
