@@ -5,8 +5,7 @@ html { font-family: 'Inter', sans-serif; }
 }
 
 body {
-    background: linear-gradient(115.14deg, rgba(145, 55, 236, 0.19) 12.09%, rgba(156, 55, 236, 0.1) 96.59%),
-linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    background: #E9DCF9;
     margin: 0;
 }
 

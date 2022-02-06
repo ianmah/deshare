@@ -8,8 +8,8 @@ const client = create('https://ipfs.infura.io:5001/api/v0')
 const Container = styled.div`
     background: #fff;
     padding: 1em;
-    overflow: auto; 
-    border-radius: 15px;
+    overflow: auto;
+    border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(145, 55, 236, 0.19);
 `
 
