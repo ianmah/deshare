@@ -1,19 +1,20 @@
 async function main() {
+  const baseTokenURI = "ipfs://";
   const memberContractFactory = await hre.ethers.getContractFactory("DeShareMember");
 
   // Deploy contract with the correct constructor arguments
-  // const memberContract = await memberContractFactory.deploy();
-  const memberContract = {
-    address: "0xBE806Cac1D25803fc97De268341040271CBf622c",
-  };
+  const memberContract = await memberContractFactory.deploy(baseTokenURI);
+  // const memberContract = {
+  //   address: "0x3c3348C98d1BD7bC0f82Ba976edd380c62d731E9",
+  // };
 
   // Wait for this transaction to be mined
-  // await memberContract.deployed();
+  await memberContract.deployed();
 
   // Get contract address
-  // console.log(`Member contract: https://mumbai.polygonscan.com/token/${memberContract.address}`);
+  console.log(`Member contract: https://mumbai.polygonscan.com/token/${memberContract.address}`);
 
-  const baseTokenURI = "ipfs://";
+ 
 
   // Get owner/deployer's wallet address
   // const [owner] = await hre.ethers.getSigners();
