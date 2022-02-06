@@ -2,16 +2,21 @@ import styled from 'styled-components'
 
 const StyledButton = styled.button`
     padding: 1em;
-    background: #5726AE;
+    background: ${p => p.disabled? '#ACA2BC' : '#5726AE'};
     color: white;
     border-radius: 10px;
     font-size: 0.8em;
     transition: all 100ms;
-
     &:hover {
+    ${p => p.disabled ?
+    `
+        cursor: not-allowed;
+    ` :
+    `
         background: #6826DD;
         cursor: pointer;
         box-shadow: 0px 2px 3px rgba(87, 38, 174, 0.39);
+    `}
     }
 `
 

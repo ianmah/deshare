@@ -21,6 +21,7 @@ const StyledInput = styled.textarea`
     width: 100%;
     padding-bottom: 1em;
 `
+
 const StyledButton = styled(Button)`
     float: right;
 `
@@ -30,6 +31,10 @@ const Compose = ({ contract }) => {
     const [description, setDescription] = useState('')
 
     const handleSubmit = async () => {
+        if (!contract) {
+            alert('please connect wallet')
+            return
+        }
         if (!name || !description) {
             alert('please fill out fields')
             return
@@ -42,9 +47,14 @@ const Compose = ({ contract }) => {
         }))
 
         console.log(metadata.path)
-        await contract.mintItem(metadata.path)
-        setName('')
-        setDescription('')
+        try {
+            await contract.mintItem(metadata.path)
+            setName('')
+            setDescription('')
+        } catch (err) {
+            console.log(err)
+            alert(err.data.message)
+        }
     }
 
     return (
@@ -64,7 +74,7 @@ const Compose = ({ contract }) => {
                 />
             </form>
             <hr/>
-            <StyledButton onClick={handleSubmit}>Post</StyledButton>
+            <StyledButton onClick={handleSubmit} disabled={!contract}>Post</StyledButton>
         </Container>
     )
 }

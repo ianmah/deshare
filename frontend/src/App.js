@@ -22,9 +22,10 @@ function App() {
 
   const mintMember = async () => {
     try {
-      await contractM.mintItem()
+      await contractM.mintItem('bafyreie3pxhmo2glhz6knocut227hgyy5o2jumj5uslyle6bwjnc2ujyhi/metadata.json')
     } catch (err) {
-      console.log(err.data.message)
+      console.log(err)
+      alert(err.data.message)
     }
   }
 
@@ -53,7 +54,7 @@ function App() {
       <div className="App">
         <Compose wallet={wallet} contract={contractP} />
         <Feed/>
-        <h2>your bal: {wallet.balanceInEth} </h2>
+        <p style={{ fontSize: '10px' }}>bal: {wallet.balanceInEth} </p>
         <Button onClick={mintMember}>Mint Member</Button>
         {/* <p>{nftMetaData}</p> */}
       </div>

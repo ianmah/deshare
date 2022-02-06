@@ -29,20 +29,29 @@ const Feed = ({ contract }) => {
         if (nfts.length > 0) { return }
         (async () => {
             // const url = new URL(`https://api.covalenthq.com/v1/80001/events/address/${address}/`);
-
-            const url = new URL(`https://api.covalenthq.com/v1/80001/tokens/${ADDR_POST}/nft_metadata/1/`);
+            let url = new URL(`https://api.covalenthq.com/v1/80001/tokens/${ADDR_POST}/nft_token_ids/`);
             url.search = new URLSearchParams({
                 key: process.env.REACT_APP_COVALENT_KEY
             })
-            const res = await (await fetch(url)).json()
-            const newNfts = Object.values(res.data.items).map((item) => {
-                // console.log(item.nft_data[0])
-                return {
-                    ...item.nft_data[0].external_data,
-                    ...item.nft_data[0]
-                }
-            })
-            console.log(newNfts)
+            let resIds = await (await fetch(url)).json()
+            const tokenCount = resIds.data.items.length
+            const newNfts = []
+
+            for (let i = 1; i < tokenCount + 1; i++) {
+                const urlPath = new URL(`https://api.covalenthq.com/v1/80001/tokens/${ADDR_POST}/nft_metadata/${i}/`);
+                urlPath.search = new URLSearchParams({
+                    key: process.env.REACT_APP_COVALENT_KEY
+                })
+                const res = await (await fetch(urlPath)).json()
+                Object.values(res.data.items).forEach((item) => {
+                    console.log(item)
+                    newNfts.unshift({
+                        ...item.nft_data[0].external_data,
+                        ...item.nft_data[0]
+                    })
+                })
+
+            }
             setNfts(newNfts)
         })();
     }, [nfts.length])
@@ -51,7 +60,7 @@ const Feed = ({ contract }) => {
         <>
             {
                 nfts.map(nft => (
-                    <Post key={nft.name}>
+                    <Post key={nft.token_id}>
                         <div style={{ marginRight: '1em' }}>
                             <UpIcon/>
                         </div>
