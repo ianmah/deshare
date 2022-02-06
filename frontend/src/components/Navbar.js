@@ -7,6 +7,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     padding: 1em;
+    box-shadow: 2px 2px 5px rgba(145, 55, 236, 0.19);
 `
 
 const StyledImg = styled.img`

@@ -16,8 +16,8 @@ async function main() {
         name: "deShareMember",
         description: "deShare is a decentralized sharing platform, for sharing stories, projects, or whatever you wish.",
         image: new File(
-            [await fs.promises.readFile('./scripts/assets/member.png')],
-            'member.png',
+            [await fs.promises.readFile('./scripts/assets/post.png')],
+            'post.png',
             {
               type: 'image/png',
             }

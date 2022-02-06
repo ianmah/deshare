@@ -52,7 +52,7 @@ function App() {
     <>
       <Navbar wallet={wallet} connectWallet={connectWallet} />
       <div className="App">
-        <Compose />
+        <Compose wallet={wallet} contract={contractP} />
         <h2>your bal: {wallet.balanceInEth} </h2>
         <Button onClick={mintMember}>Mint Member</Button>
         {/* <p>{nftMetaData}</p> */}
