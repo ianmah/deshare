@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import UpIcon from './UpIcon'
+import { ADDR_POST, ADDR_MEMBER } from '../constants'
 
 const Post = styled.div`
     margin-top: 1em;
@@ -27,10 +28,9 @@ const Feed = ({ contract }) => {
     useEffect(() => {
         if (nfts.length > 0) { return }
         (async () => {
-            const address = '0xa3b36abbfb2436055e94614b31cda05336893ec7'
             // const url = new URL(`https://api.covalenthq.com/v1/80001/events/address/${address}/`);
 
-            const url = new URL(`https://api.covalenthq.com/v1/80001/tokens/${address}/nft_metadata/1/`);
+            const url = new URL(`https://api.covalenthq.com/v1/80001/tokens/${ADDR_POST}/nft_metadata/1/`);
             url.search = new URLSearchParams({
                 key: process.env.REACT_APP_COVALENT_KEY
             })

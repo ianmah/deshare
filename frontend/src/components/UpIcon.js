@@ -9,6 +9,7 @@ const StyledSvg = styled.svg`
         cursor: pointer;
         fill: #6826DD;
         transform: translateY(-2px);
+        -webkit-filter: drop-shadow( 0px 4px 2px rgba(87, 38, 174, 0.3));
         filter: drop-shadow( 0px 4px 2px rgba(87, 38, 174, 0.3));
     }
 `

@@ -4,14 +4,12 @@ import Navbar from './components/Navbar'
 import Compose from './components/Compose'
 import Feed from './components/Feed'
 import Button from './components/Button'
+import { ADDR_POST, ADDR_MEMBER } from './constants'
 
 import './App.css'
 
 import DeSharePost from './artifacts/contracts/DeShare.sol/DeSharePost.json'
 import DeShareMember from './artifacts/contracts/DeShare.sol/DeShareMember.json'
-
-const dspAddress = "0x8C199F1c92c9ecea3FA7c182b5202ba6a5611396"
-const dsmAddress = "0xBE806Cac1D25803fc97De268341040271CBf622c"
 
 // Specify your own API keys
 // Each is optional, and if you omit it the default
@@ -35,8 +33,8 @@ function App() {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner()
     const address = await signer.getAddress()      
-    setContractP(new ethers.Contract(dspAddress, DeSharePost.abi, signer))
-    setContractM(new ethers.Contract(dsmAddress, DeShareMember.abi, signer))
+    setContractP(new ethers.Contract(ADDR_POST, DeSharePost.abi, signer))
+    setContractM(new ethers.Contract(ADDR_MEMBER, DeShareMember.abi, signer))
 
     provider.getBalance(address).then((balance) => {
       // convert a currency unit from wei to ether
