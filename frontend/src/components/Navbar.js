@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Button from './Button'
 
 const Container = styled.div`
     background: #fff;
@@ -25,14 +26,24 @@ const AddressContainer = styled.p`
     margin-left: auto;
 `
 
-export default ({ wallet }) => {
+const StyledButton = styled(Button)`
+    margin-left: auto;
+`
+
+const Navbar = ({ wallet, connectWallet }) => {
     return (
         <Container>
             <StyledImg src="/deshare.png"/>
             <Title>DeShare</Title>
-            <AddressContainer>
-                {wallet.address}
-            </AddressContainer>
+            {
+                wallet.address ? 
+                <AddressContainer>
+                    {wallet.address}
+                </AddressContainer> :
+                <StyledButton onClick={connectWallet}>Connect Wallet</StyledButton>
+            }
         </Container>
     )
 }
+
+export default Navbar

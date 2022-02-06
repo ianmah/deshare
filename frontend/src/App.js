@@ -14,7 +14,6 @@ const dsmAddress = "0xBE806Cac1D25803fc97De268341040271CBf622c"
 // Specify your own API keys
 // Each is optional, and if you omit it the default
 // API key for that service will be used.
-const provider = new ethers.providers.Web3Provider(window.ethereum)
 
 function App() {
   const [wallet, setWallet] = useState({})
@@ -29,27 +28,24 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    async function connectEth() {
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner()
-      const address = await signer.getAddress()      
-      setContractP(new ethers.Contract(dspAddress, DeSharePost.abi, signer))
-      setContractM(new ethers.Contract(dsmAddress, DeShareMember.abi, signer))
+  const connectWallet = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner()
+    const address = await signer.getAddress()      
+    setContractP(new ethers.Contract(dspAddress, DeSharePost.abi, signer))
+    setContractM(new ethers.Contract(dsmAddress, DeShareMember.abi, signer))
 
-      provider.getBalance(address).then((balance) => {
-        // convert a currency unit from wei to ether
-        const balanceInEth = ethers.utils.formatEther(balance)
-        setWallet({...wallet, signer, address, balanceInEth})
-       })
-
-    }
-    connectEth()
-  }, [])
+    provider.getBalance(address).then((balance) => {
+      // convert a currency unit from wei to ether
+      const balanceInEth = ethers.utils.formatEther(balance)
+      setWallet({...wallet, signer, address, balanceInEth})
+      })
+  }
 
   return (
     <>
-      <Navbar wallet={wallet}/>
+      <Navbar wallet={wallet} connectWallet={connectWallet} />
       <div className="App">
         <h2>your bal: {wallet.balanceInEth} </h2>
         <Button onClick={mintMember}>Mint Member</Button>
