@@ -34,7 +34,7 @@ const Navbar = ({ wallet, connectWallet }) => {
     return (
         <Container>
             <StyledImg src="/deshare.png"/>
-            <Title>DeShare</Title>
+            <Title>deShare</Title>
             {
                 wallet.address ? 
                 <AddressContainer>

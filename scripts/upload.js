@@ -5,9 +5,11 @@ require("dotenv").config();
 const { NFTSTORAGE_KEY } = process.env;
 const client = new NFTStorage({ token: NFTSTORAGE_KEY });
 
-// const data = await fs.promises.readFile('./assets/member.png')
-// const cid = await storage.storeBlob(new Blob([data]))
-// console.log({ cid })
+// async function test() {
+//     const data = await fs.promises.readFile('./scripts/assets/post.png')
+//     console.log(data)
+// }
+// test()
 
 async function main() {
     const metadata = await client.store({

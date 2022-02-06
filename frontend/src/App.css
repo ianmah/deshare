@@ -16,6 +16,13 @@ h1 {
 
 .App {
   padding: 1em;
+  width: 700px;
+  margin: auto;
+  /* border: 1px solid rgba(145, 55, 236, 0.4); */
+}
+
+hr {
+  border-top: 1px solid rgba(145, 55, 236, 0.19);
 }
 
 button {
@@ -40,4 +47,17 @@ button {
 
   /* Corrects inability to style clickable `input` types in iOS */
   -webkit-appearance: none;
+}
+
+textarea {
+  border: none;
+  font-family: 'Inter var', sans-serif; 
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
 }
