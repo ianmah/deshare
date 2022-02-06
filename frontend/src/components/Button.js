@@ -15,10 +15,12 @@ const StyledButton = styled.button`
     }
 `
 
-export default ({ children, ...props }) => {
+const Button = ({ children, ...props }) => {
     return (
         <StyledButton {...props} >
             {children}
         </StyledButton>
     )
 }
+
+export default Button

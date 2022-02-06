@@ -1,0 +1,1 @@
+export const POST_ADDRESS = '0xa3b36abbfb2436055e94614b31cda05336893ec7'

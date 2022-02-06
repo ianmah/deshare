@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ethers } from 'ethers'
 import Navbar from './components/Navbar'
 import Compose from './components/Compose'
