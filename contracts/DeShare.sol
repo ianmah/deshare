@@ -17,7 +17,7 @@ contract DeShareMember is ERC721, ERC721Enumerable, Ownable {
     constructor() ERC721("DeShare Member", "DSM") {}
 
     function mintItem() public returns (uint256) {
-        require(balanceOf(msg.sender) < 1, "You can only mint one member NFT");
+        require(balanceOf(msg.sender) < 3, "You can only mint three member NFTs");
 
         _tokenIds.increment();
 
@@ -26,6 +26,37 @@ contract DeShareMember is ERC721, ERC721Enumerable, Ownable {
 
         return id;
     }
+
+    //  mapping(address => uint8) private _allowList;
+    // _allowList[someAddress] = someNumber; 
+
+    // function setAllowList(address[] calldata addresses, uint8 numAllowedToMint) external onlyOwner {
+    // for (uint256 i = 0; i < addresses.length; i++) 
+    // {
+    //     _allowList[addresses[i]] = numAllowedToMint;
+    // }
+    // }
+
+    function setAllowList() external onlyOwner {
+    // only the owner can call setAllowList()!
+    }
+    
+    // allowlist code
+    
+    function mintAllowList(uint8 numberOfTokens) external payable {
+    uint256 ts = totalSupply();
+
+    require(isAllowListActive, "Allow list is not active");
+    require(numberOfTokens <= _allowList[msg.sender], "Exceeded max available to purchase");
+    require(ts + numberOfTokens <= MAX_SUPPLY, "Purchase would exceed max tokens");
+    require(PRICE_PER_TOKEN * numberOfTokens <= msg.value, "Ether value sent is not correct");
+
+    _allowList[msg.sender] -= numberOfTokens;
+    for (uint256 i = 0; i < numberOfTokens; i++) {
+        _safeMint(msg.sender, ts + i);
+    }
+    }
+    
 
     // The following functions are overrides required by Solidity.
 
@@ -47,6 +78,7 @@ contract DeShareMember is ERC721, ERC721Enumerable, Ownable {
     {
         return super.supportsInterface(interfaceId);
     }
+
 }
 
 contract DeSharePost is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
